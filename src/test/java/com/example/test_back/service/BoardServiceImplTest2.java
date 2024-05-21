@@ -24,12 +24,12 @@ class BoardServiceImplTest2 {
 
     @Test
     void getById() {
-        Board board = new Board(1l, "test", "test");
-        BDDMockito.given(boardRepository.findById(1l))
+        Board board = new Board(1L, "test", "test");
+        BDDMockito.given(boardRepository.findById(1L))
                 .willReturn(Optional.of(board));
 
 
-        Board byId = boardService.getBoard(1l);
+        Board byId = boardService.getBoard(1L);
 
 //        행위 검증
         Mockito.verify(boardRepository, Mockito.times(1)).findById(1l);
@@ -38,22 +38,21 @@ class BoardServiceImplTest2 {
         assertEquals("test", byId.getText());
         assertNotNull(byId.getId());
     }
-//    @Test
-//    void getByIdNotExist() {
-//        BDDMockito.given(boardRepository.findById(1l)).willReturn(Optional.empty());
-//        BDDMockito.when(boardService.getBoard(1l)).thenThrow(IllegalArgumentException.class);
-//        assertThrows(IllegalArgumentException.class, ()->{
-//            boardService.getBoard(1l);
-//        });
-//        Mockito.verify(boardRepository,Mockito.times(1)).findById(1l);
-//
-//    }
+
+    @Test
+    void getByIdNotExist() {
+        BDDMockito.given(boardRepository.findById(1L)).willReturn(Optional.empty());
+        assertThrows(IllegalArgumentException.class, ()->{
+            boardService.getBoard(1L);
+        });
+        Mockito.verify(boardRepository,Mockito.times(1)).findById(1L);
+
+    }
 
     @Test
     void getAll() {
-
         BDDMockito.given(boardRepository.findAll()).willReturn(
-                List.of(new Board(1l,"test", "test"),new Board(2l,"test", "test")));
+                List.of(new Board(1L,"test", "test"),new Board(2L,"test", "test")));
 
         List<Board> all = boardService.getAllBoards();
 
