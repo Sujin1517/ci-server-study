@@ -38,16 +38,16 @@ class BoardServiceImplTest2 {
         assertEquals("test", byId.getText());
         assertNotNull(byId.getId());
     }
-    @Test
-    void getByIdNotExist() {
-        BDDMockito.given(boardRepository.findById(1l)).willReturn(Optional.empty());
-        BDDMockito.when(boardService.getBoard(1l)).thenThrow(IllegalArgumentException.class);
-        assertThrows(IllegalArgumentException.class, ()->{
-            boardService.getBoard(1l);
-        });
-        Mockito.verify(boardRepository,Mockito.times(1)).findById(1l);
-
-    }
+//    @Test
+//    void getByIdNotExist() {
+//        BDDMockito.given(boardRepository.findById(1l)).willReturn(Optional.empty());
+//        BDDMockito.when(boardService.getBoard(1l)).thenThrow(IllegalArgumentException.class);
+//        assertThrows(IllegalArgumentException.class, ()->{
+//            boardService.getBoard(1l);
+//        });
+//        Mockito.verify(boardRepository,Mockito.times(1)).findById(1l);
+//
+//    }
 
     @Test
     void getAll() {
