@@ -48,7 +48,7 @@ class BoardControllerTest {
         BDDMockito.given(boardService.getBoard(1L))
                 .willReturn(new Board(1L, "n1", "t1"));
 
-        mvc.perform(get("/api/boards/"))
+        mvc.perform(get("/api/boards/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
                 .andDo(MockMvcResultHandlers.print());

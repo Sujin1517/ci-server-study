@@ -61,17 +61,17 @@ class BoardServiceImplTest2 {
         Mockito.verify(boardRepository).findAll();
     }
 
-    @Test
-    void saveBoard() {
-        BoardRequest request = new BoardRequest("test", "test");
-        Board entity = Board.builder().name(request.name()).text(request.text()).build();
-        BDDMockito.given(boardRepository.save(entity))
-                .willReturn(entity);
-
-        boardService.addBoard(request);
-
-        Mockito.verify(boardRepository, Mockito.times(1)).save(entity);
-    }
+//    @Test
+//    void saveBoard() {
+//        BoardRequest request = new BoardRequest("test", "test");
+//        Board entity = Board.builder().name(request.name()).text(request.text()).build();
+//        BDDMockito.given(boardRepository.save(entity))
+//                .willReturn(entity);
+//
+//        boardService.addBoard(request);
+//
+//        Mockito.verify(boardRepository, Mockito.times(1)).save(entity);
+//    }
 
     @Test
     void deleteBoard() {

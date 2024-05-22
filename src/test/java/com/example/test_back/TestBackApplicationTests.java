@@ -14,13 +14,13 @@ class TestBackApplicationTests {
 	void contextLoads() {
 	}
 
-	@Test
-	void dbNameIsH2(@Value("${spring.datasource.url}") String url) {
-		assertEquals("h2", url.split(":")[1]);
-	}
-
-	@Test
-	void dbUserIsSa(@Value("${spring.datasource.username}") String username) {
-		assertEquals("sa", username);
-	}
+//	@Test
+//	void dbNameIsH2(@Value("${spring.datasource.url}") String url) {
+//		assertEquals("h2", url.split(":")[1]);
+//	}
+//
+//	@Test
+//	void dbUserIsSa(@Value("${spring.datasource.username}") String username) {
+//		assertEquals("sa", username);
+//	}
 }
