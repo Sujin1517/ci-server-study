@@ -8,8 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "BOARDS")
-@Builder
-@EqualsAndHashCode
+@Builder //@EqualsAndHashCode
 public class Board {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CONTENT_ID")
