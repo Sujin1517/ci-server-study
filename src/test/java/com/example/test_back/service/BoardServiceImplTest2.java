@@ -32,7 +32,7 @@ class BoardServiceImplTest2 {
         Board byId = boardService.getBoard(1L);
 
 //        행위 검증
-        Mockito.verify(boardRepository, Mockito.times(1)).findById(1l);
+        Mockito.verify(boardRepository, Mockito.times(1)).findById(1L);
 //        상태 검증
         assertEquals("test", byId.getName());
         assertEquals("test", byId.getText());
@@ -71,5 +71,23 @@ class BoardServiceImplTest2 {
         boardService.addBoard(request);
 
         Mockito.verify(boardRepository, Mockito.times(1)).save(entity);
+    }
+
+    @Test
+    void deleteBoard() {
+        Long id = 1L;
+        BDDMockito.given(boardRepository.findById(id))
+                .willReturn(Optional.of(new Board(id, null, null)));
+
+        boardService.deleteBoard(id);
+    }
+    @Test
+    void deleteBoardFail() {
+        Long id = 1L;
+        BDDMockito.given(boardRepository.findById(id))
+                .willReturn(Optional.empty());
+
+        assertThrows(IllegalArgumentException.class, () -> boardService.deleteBoard(id));
+//        Mockito.verify(boardRepository, Mockito.times(0)).findById(id);
     }
 }
