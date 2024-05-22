@@ -1,0 +1,12 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: test_back
+  datasource:
+        url: jdbc:h2:mem:test
+        username: sa
+        password:
+  jpa:
+    hibernate:
+      ddl-auto: create
