@@ -19,9 +19,6 @@ public class TestInit {
     protected BoardRepository boardRepository;
 
     @Autowired
-    private BoardController boardController;
-
-    @Autowired
     protected BoardService boardService;
 
     @BeforeEach

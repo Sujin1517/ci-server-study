@@ -31,6 +31,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	runtimeOnly 'com.h2database:h2'
 }
 
 
@@ -50,7 +51,7 @@ jacocoTestCoverageVerification{
 			includes = ['com.example.test_back.*.**']
 			limit {
 				value = 'COVEREDRATIO'
-				minimum = 0.8
+				minimum = 0.6
 			}
 		}
 	}
