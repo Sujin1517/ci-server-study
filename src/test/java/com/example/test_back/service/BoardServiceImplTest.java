@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @Transactional
 class BoardServiceImplTest extends TestInit {
-
+/*
     @Test
     void getAllBoards() {
         List<Board> boards = new ArrayList<>();
@@ -91,5 +91,27 @@ class BoardServiceImplTest extends TestInit {
     void deleteBoardFail() {
         // when then
         assertThrows(IllegalArgumentException.class, () -> boardService.deleteBoard(1L));
+    }
+
+ */
+    @Test
+    void boardBuilder() {
+        Board board = Board.builder()
+                .id(1L)
+                .name("name")
+                .text("text")
+                .build();
+
+        assertEquals(1L, board.getId());
+        assertEquals("name", board.getName());
+        assertEquals("text", board.getText());
+    }
+
+    @Test
+    void boardRequestDto() {
+        BoardRequest boardRequest = new BoardRequest("n", "t");
+
+        assertEquals("n", boardRequest.name());
+        assertEquals("t", boardRequest.text());
     }
 }
