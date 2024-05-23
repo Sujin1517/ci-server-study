@@ -1,16 +1,22 @@
 package com.example.test_back.controller;
 
+import com.example.test_back.domain.dto.request.BoardRequest;
 import com.example.test_back.domain.entity.Board;
+import com.example.test_back.domain.repository.BoardRepository;
 import com.example.test_back.service.BoardServiceImpl;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -23,8 +29,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class BoardControllerTest {
     @MockBean
     private BoardServiceImpl boardService;
+    @Mock
+    private BoardRepository boardRepository;
     @Autowired
     private MockMvc mvc;
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Test
     void 보드_모두_가져오기_성공() throws Exception {
@@ -62,39 +72,38 @@ class BoardControllerTest {
                 .andExpect(status().isBadRequest())
                 .andDo(MockMvcResultHandlers.print());
     }
-    @Test
-    void 보드_하나_가져오기_실패_없는_ID() throws Exception {
+//    @Test
+//    void 보드_하나_가져오기_실패_없는_ID() throws Exception {
 //        BDDMockito.given(boardService.getBoard(999L))
 //                .willThrow(IllegalArgumentException.class)
 //                .willReturn(null);
-
+//
 //        BDDMockito.willThrow(new IllegalArgumentException())
 //                        .given(boardService)
 //                                .deleteBoard(999L);
 //
 //        mvc.perform(get("/api/boards/999"))
 //                .andDo(MockMvcResultHandlers.print());
+//    }
+
+    @Test
+    void 보드_추가하기_성공() throws Exception {
+        String request = objectMapper.writeValueAsString(new BoardRequest("qwer", "asdf"));
+        mvc.perform(post("/api/boards")
+                .content(request)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated());
     }
 
 //    @Test
-//    void 보드_추가하기_성공() throws Exception {
-//        String request = objectMapper.writeValueAsString(new BoardRequest("qwer", "asdf"));
-//        mvc.perform(post("/api/boards")
-//                .content(request)
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .accept(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isCreated());
-//    }
-//
-//    @Test
 //    void 보드_삭제하기_실패() throws Exception {
-//        BDDMockito.given(boardService.getBoard(1L))
-//                        .willReturn(null);
+//        BDDMockito.given(boardRepository.findById(9999L))
+//                        .willReturn(Optional.empty());
 //
-//        mvc.perform(delete("/api/boards/1"))
-////                .andExpect(result -> assertTrue(result.getResolvedException().getClass().isAssignableFrom(IllegalArgumentException.class)));
-////                .andExpect(status().is5xxServerError());
-//                .andExpect(status().isOk())
+//        mvc.perform(delete("/api/boards/9999"))
+////                .andExpect(status().is5xxServerError())
+//                .andExpect((r) -> assertTrue(r.getResolvedException().getClass().isAssignableFrom(IllegalArgumentException.class)))
 //                .andDo(MockMvcResultHandlers.print());
 //
 //    }
