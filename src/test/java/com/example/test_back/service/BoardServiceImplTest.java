@@ -95,7 +95,7 @@ class BoardServiceImplTest extends TestInit {
 
  */
     @Test
-    void boardBuilder() {
+    void 보드_빌더_검증() {
         Board board = Board.builder()
                 .id(1L)
                 .name("name")
@@ -108,7 +108,7 @@ class BoardServiceImplTest extends TestInit {
     }
 
     @Test
-    void boardRequestDto() {
+    void 보드_리퀘스트_검증() {
         BoardRequest boardRequest = new BoardRequest("n", "t");
 
         assertEquals("n", boardRequest.name());

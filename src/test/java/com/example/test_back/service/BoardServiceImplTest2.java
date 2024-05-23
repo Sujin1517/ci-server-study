@@ -14,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(MockitoExtension.class)
 class BoardServiceImplTest2 {
@@ -23,7 +24,7 @@ class BoardServiceImplTest2 {
     private BoardServiceImpl boardService;
 
     @Test
-    void getById() {
+    void 아이디로_하나_가져오기_성공() {
         Board board = new Board(1L, "test", "test");
         BDDMockito.given(boardRepository.findById(1L))
                 .willReturn(Optional.of(board));
@@ -40,7 +41,7 @@ class BoardServiceImplTest2 {
     }
 
     @Test
-    void getByIdNotExist() {
+    void 아이디로_하나_가져오기_해당_아이디_없음() {
         BDDMockito.given(boardRepository.findById(1L)).willReturn(Optional.empty());
         assertThrows(IllegalArgumentException.class, ()->{
             boardService.getBoard(1L);
@@ -50,7 +51,7 @@ class BoardServiceImplTest2 {
     }
 
     @Test
-    void getAll() {
+    void 보드_모두_가져오기_성공() {
         BDDMockito.given(boardRepository.findAll()).willReturn(
                 List.of(new Board(1L,"test", "test"),new Board(2L,"test", "test")));
 
@@ -61,20 +62,18 @@ class BoardServiceImplTest2 {
         Mockito.verify(boardRepository).findAll();
     }
 
-//    @Test
-//    void saveBoard() {
-//        BoardRequest request = new BoardRequest("test", "test");
-//        Board entity = Board.builder().name(request.name()).text(request.text()).build();
-//        BDDMockito.given(boardRepository.save(entity))
-//                .willReturn(entity);
-//
-//        boardService.addBoard(request);
-//
-//        Mockito.verify(boardRepository, Mockito.times(1)).save(entity);
-//    }
+    @Test
+    void 보드_추가_성공() {
+        BoardRequest request = new BoardRequest("test", "test");
+        BDDMockito.given(boardRepository.save(any())).willReturn(null);
+
+        boardService.addBoard(request);
+
+        Mockito.verify(boardRepository, Mockito.times(1)).save(any());
+    }
 
     @Test
-    void deleteBoard() {
+    void 보드_삭제_성공() {
         Long id = 1L;
         BDDMockito.given(boardRepository.findById(id))
                 .willReturn(Optional.of(new Board(id, null, null)));
@@ -82,7 +81,7 @@ class BoardServiceImplTest2 {
         boardService.deleteBoard(id);
     }
     @Test
-    void deleteBoardFail() {
+    void 보드_삭제_실패_없는_아이디() {
         Long id = 1L;
         BDDMockito.given(boardRepository.findById(id))
                 .willReturn(Optional.empty());
