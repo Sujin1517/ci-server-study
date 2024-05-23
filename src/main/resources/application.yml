@@ -8,8 +8,8 @@ spring:
 #    username: sa
 #    password:
     url: jdbc:mysql://localhost:3306/test_board?characterEncoding=UTF-8&serverTimezone=Asia/Seoul
-    password: 1234
-    username: root
+    password: ${dbPassword}
+    username: ${dbUsername}
   jpa:
     hibernate:
       ddl-auto: update
