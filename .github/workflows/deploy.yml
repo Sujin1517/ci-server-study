@@ -24,4 +24,4 @@ jobs:
           cd ci-server-study
           git pull
           sh gradlew build
-          nohub java -jar -Dspring.profiles.active=prod build/lib/*T.jar >/dev/null 2>&1 &
+          nohub java -jar build/lib/*T.jar >/dev/null 2>&1 &
