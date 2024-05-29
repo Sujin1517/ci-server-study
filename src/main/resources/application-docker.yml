@@ -1,0 +1,13 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: test_back
+  datasource:
+    url: jdbc:postgresql://postgres:${serverPort}/test_board?characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+    password: ${dbPassword}
+    username: ${dbUsername}
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
